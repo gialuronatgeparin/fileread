@@ -1,0 +1,33 @@
+from collections import Counter
+
+def analyze_text(file_path):
+    with open(file_path, 'r') as file:
+        # Читаем содержимое файла
+        text = file.read()
+
+        # Удаляем знаки препинания и приводим текст к нижнему регистру
+        text = text.lower()
+        text = text.replace('.', '').replace(',', '').replace('!', '').replace('?', '')
+
+        # Разделяем текст на слова
+        words = text.split()
+
+        # Подсчитываем количество уникальных слов
+        unique_words_count = len(set(words))
+
+        # Подсчитываем наиболее часто встречающиеся слова
+        word_counts = Counter(words)
+        most_common_words = word_counts.most_common(5)
+
+        return unique_words_count, most_common_words
+
+# Путь к текстовому файлу для анализа
+file_path = 'sample.txt'
+
+# Анализируем текстовый файл
+unique_count, common_words = analyze_text(file_path)
+
+# Выводим результаты
+print("Количество уникальных слов: ", unique_count)
+print("Наиболее часто встречающиеся слова:")
+for word, count in common_words:
